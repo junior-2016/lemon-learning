@@ -1,0 +1,7 @@
+<map id="plink" name="plink">
+<area shape="rect" id="node2" href="$structconfig.html" title="config结构体,config是对rule进行处理后的结果 " alt="" coords="15,128,73,155"/>
+<area shape="rect" id="node3" href="$structstate.html" title="state结构体 " alt="" coords="123,233,173,260"/>
+<area shape="rect" id="node4" href="$structaction.html" title="action结构体 " alt="" coords="150,128,207,155"/>
+<area shape="rect" id="node5" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="264,7,307,33"/>
+<area shape="rect" id="node6" href="$structsymbol.html" title="symbol(符号)结构体 " alt="" coords="357,128,421,155"/>
+</map>

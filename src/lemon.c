@@ -68,14 +68,14 @@ static char* msort(char*,char**,int(*)(const char*,const char*));///< ???
 /* Option 相关声明 */
 /// \brief 选项类型(枚举从1开始)
 enum option_type {
-    OPT_FLAG=1,
-    OPT_INT,
-    OPT_DBL,
-    OPT_STR,
-    OPT_FFLAG,
-    OPT_FINT,
-    OPT_FDBL,
-    OPT_FSTR
+    OPT_FLAG=1,///<前缀为"-"或"+"的选项类型,同时选项的附加参数值(*arg)储存0(前缀为'+')或1(前缀为'-')
+    OPT_INT,///<形如"OptionLabel=<integer>"的选项类型,同时选项的附加参数值(*arg)储存"="后面的整数值
+    OPT_DBL,///<形如"OptionLabel=<double>"的选项类型,同时选项的附加参数值(*arg)储存"="后面的浮点数
+    OPT_STR,///<形如"OptionLabel=<string>"的选项类型,同时选项的附加参数值(*arg)储存"="后面的字符串
+    OPT_FFLAG,///<前缀为"-"或"+"的选项类型,同时选项的附加参数为void(*f)(int)的函数指针,实参用0('+'前缀)或1('-'前缀)
+    OPT_FINT,///<形如"OptionLabel=<integer>"的选项类型,同时选项参数arg为void(*f)(int)的函数指针,实参用"="后面的整数值
+    OPT_FDBL,///<形如"OptionLabel=<double>"的选项类型,同时选项参数arg为void(*f)(double)的函数指针,实参用"="后面的浮点数
+    OPT_FSTR ///<两种情况:1)形如"OptionLabel=<string>"的选项类型;2)形如"-/+[OptionLabel]...<string>".选项参数arg为void(*f)(string)的函数指针,但是对于1)实参用"="后面的字符串;对于2)实参用命令行参数末尾的string
 };
 /// \brief 选项结构体
 struct s_options{
@@ -132,28 +132,32 @@ struct symbol{
 
 /// \brief rule(文法规则)结构体
 struct rule{
-    struct symbol *lhs;
-    const char *lhsalias;
-    int lhsStart;
-    int ruleline;
-    int nrhs;
-    struct symbol **rhs;
-    const char **rhsalias;
-    int line;
-    const char *code;
-    const char *codePrefix;
-    const char *codeSuffix;
-    int noCode;
-    int codeEmitted;
-    struct symbol *precsym;
-    int index;
-
+    struct symbol *lhs;    ///< 文法规则定义符(::=)左边的符号
+    const char *lhsalias;  ///< 上面lhs符号的别名,如果没有别名则为空指针.例如: expr(A)::=expr(B),其中A就是左边expr的别名
+    int lhsStart;          ///< 当rule左边的符号(lhs)是一个开始符号则lhsStart=true.
+    int ruleline;          ///< 文法规则的行号
+    int nrhs;              ///< rule定义符(::=)右边所有符号的个数(包括终结符和非终结符)
+    struct symbol **rhs;   ///< rule定义符(::=)右边所有的符号指针组成的数组
+    const char **rhsalias; ///< rule定义符(::=)右边所有符号的别名,同样是一个指针数组
+    int line;              ///< 在rule最右边C动作代码开始处的行号
+    const char *code;      ///< 当rule执行归约(REDUCE)时需要执行的C代码
+    const char *codePrefix;///< 在code[]前面的Setup code ??
+    const char *codeSuffix;///< 在code[]后面的Breakdown code ??
+    int noCode;            ///< 如果当前rule没有与之相关的C代码,则noCode=true
+    int codeEmitted;       ///< 如果代码已经被提交(emitted)则codeEmitted=true
+    struct symbol *precsym;///< 当前rule具有优先级的符号
+    int index;             ///< 当前rule的索引
+    int iRule;             ///< Rule number as used in the generated tables
+    Boolean canReduce;     ///< 代表当前rule能否被归约
+    Boolean doesReduce;    ///< 是否优化过Reduce actions(归约动作)
+    struct rule *nextlhs;  ///< 指向由具有相同的左边符号(lhs)构成的链表的下一个rule指针
+    struct rule *next;     ///< 指向由所有rule构成的全局链表的下一个rule指针
 };
 
-/// \brief
+/// \brief 完成fellow集处理的状态
 enum cfgstatus{
-    COMPLETE,
-    INCOMPLETE
+    COMPLETE,   ///< 完成fellow集的处理
+    INCOMPLETE  ///< 未完成fellow集的处理
 };
 /// \brief config结构体,config是对rule进行处理后的结果
 struct config{

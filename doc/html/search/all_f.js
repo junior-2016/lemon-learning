@@ -16,6 +16,8 @@ var searchData=
   ['state',['state',['../structstate.html',1,'']]],
   ['state_5finit',['State_init',['../lemon_8c.html#a8aac6477340919fc5e0dcd7ec8efa049',1,'lemon.c']]],
   ['statenum',['statenum',['../structstate.html#a6fe8f8d12c6fb07363b03740231628c8',1,'state']]],
+  ['status',['status',['../structconfig.html#afdf08b6387e26bcea87b2fde89067eec',1,'config']]],
+  ['stp',['stp',['../structconfig.html#a1a4d98b23408bb047054579dd46c70e2',1,'config']]],
   ['strsafe_5finit',['Strsafe_init',['../lemon_8c.html#a085e4cb794f7302f16da7990bac4c769',1,'lemon.c']]],
   ['subsym',['subsym',['../structsymbol.html#aed5a397a5be7694d28fb665ddb3dc6d5',1,'symbol']]],
   ['symbol',['symbol',['../structsymbol.html',1,'']]],

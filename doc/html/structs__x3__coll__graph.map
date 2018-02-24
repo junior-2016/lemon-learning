@@ -1,7 +1,9 @@
 <map id="s_x3" name="s_x3">
-<area shape="rect" id="node2" href="$structs__x3node.html" title="类似于s_x1node与s_x2node,用来储存state " alt="" coords="19,200,97,227"/>
-<area shape="rect" id="node3" href="$structconfig.html" title="config结构体 " alt="" coords="5,5,63,32"/>
-<area shape="rect" id="node4" href="$structstate.html" title="state结构体 " alt="" coords="86,109,137,136"/>
-<area shape="rect" id="node5" href="$structaction.html" title="action结构体 " alt="" coords="95,5,152,32"/>
-<area shape="rect" id="node6" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="177,5,219,32"/>
+<area shape="rect" id="node2" href="$structs__x3node.html" title="类似于s_x1node与s_x2node,用来储存state " alt="" coords="16,324,94,351"/>
+<area shape="rect" id="node3" href="$structconfig.html" title="config结构体,config是对rule进行处理后的结果 " alt="" coords="69,128,126,155"/>
+<area shape="rect" id="node4" href="$structplink.html" title="plink结构体 " alt="" coords="46,233,96,260"/>
+<area shape="rect" id="node5" href="$structstate.html" title="state结构体 " alt="" coords="178,233,228,260"/>
+<area shape="rect" id="node6" href="$structaction.html" title="action结构体 " alt="" coords="220,128,277,155"/>
+<area shape="rect" id="node7" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="330,7,372,33"/>
+<area shape="rect" id="node8" href="$structsymbol.html" title="symbol(符号)结构体 " alt="" coords="427,128,491,155"/>
 </map>

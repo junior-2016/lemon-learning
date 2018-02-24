@@ -81,17 +81,72 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structconfig-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">config Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>config结构体  
+<p>config结构体,config是对rule进行处理后的结果  
  <a href="structconfig.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for config:</div>
+<div class="dyncontent">
+<div class="center"><img src="structconfig__coll__graph.png" border="0" usemap="#config_coll__map" alt="Collaboration graph"/></div>
+<map name="config_coll__map" id="config_coll__map">
+<area shape="rect" id="node2" href="structplink.html" title="plink结构体 " alt="" coords="24,233,73,260"/>
+<area shape="rect" id="node3" href="structstate.html" title="state结构体 " alt="" coords="170,233,221,260"/>
+<area shape="rect" id="node4" href="structaction.html" title="action结构体 " alt="" coords="320,128,377,155"/>
+<area shape="rect" id="node5" href="structrule.html" title="rule(文法规则)结构体 " alt="" coords="233,7,275,33"/>
+<area shape="rect" id="node6" href="structsymbol.html" title="symbol(符号)结构体 " alt="" coords="402,128,466,155"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a8e5c72aa9b4dbdfcda9cc9a33aa1ac59"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e5c72aa9b4dbdfcda9cc9a33aa1ac59"></a>
+struct <a class="el" href="structrule.html">rule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#a8e5c72aa9b4dbdfcda9cc9a33aa1ac59">rp</a></td></tr>
+<tr class="memdesc:a8e5c72aa9b4dbdfcda9cc9a33aa1ac59"><td class="mdescLeft">&#160;</td><td class="mdescRight">rp代表config的前身,config是由这个rp指针指向的rule处理得到的 <br /></td></tr>
+<tr class="separator:a8e5c72aa9b4dbdfcda9cc9a33aa1ac59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa628525de6016f3bd01f49499ef05cb3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa628525de6016f3bd01f49499ef05cb3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#aa628525de6016f3bd01f49499ef05cb3">dot</a></td></tr>
+<tr class="memdesc:aa628525de6016f3bd01f49499ef05cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">语法分析中界点,数值为已经进栈的符号数量,也就代表了当前正在处理的符号位置 <br /></td></tr>
+<tr class="separator:aa628525de6016f3bd01f49499ef05cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae14004c0e734d7865cf064a96361918f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae14004c0e734d7865cf064a96361918f"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#ae14004c0e734d7865cf064a96361918f">fws</a></td></tr>
+<tr class="memdesc:ae14004c0e734d7865cf064a96361918f"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前config拥有的fellow集(fellow集存放当前config可以利用的所有终结符) <br /></td></tr>
+<tr class="separator:ae14004c0e734d7865cf064a96361918f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9b1fbd290f96b7eeed8bd650258f128"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9b1fbd290f96b7eeed8bd650258f128"></a>
+struct <a class="el" href="structplink.html">plink</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#ab9b1fbd290f96b7eeed8bd650258f128">fplp</a></td></tr>
+<tr class="memdesc:ab9b1fbd290f96b7eeed8bd650258f128"><td class="mdescLeft">&#160;</td><td class="mdescRight">fellow集顺向传播链表 <br /></td></tr>
+<tr class="separator:ab9b1fbd290f96b7eeed8bd650258f128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad90a39b67a446352a0557937a4e65d1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad90a39b67a446352a0557937a4e65d1c"></a>
+struct <a class="el" href="structplink.html">plink</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#ad90a39b67a446352a0557937a4e65d1c">bplp</a></td></tr>
+<tr class="memdesc:ad90a39b67a446352a0557937a4e65d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fellow集逆向传播链表 <br /></td></tr>
+<tr class="separator:ad90a39b67a446352a0557937a4e65d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a4d98b23408bb047054579dd46c70e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a4d98b23408bb047054579dd46c70e2"></a>
+struct <a class="el" href="structstate.html">state</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#a1a4d98b23408bb047054579dd46c70e2">stp</a></td></tr>
+<tr class="memdesc:a1a4d98b23408bb047054579dd46c70e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">包含当前config的状态指针 <br /></td></tr>
+<tr class="separator:a1a4d98b23408bb047054579dd46c70e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdf08b6387e26bcea87b2fde89067eec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afdf08b6387e26bcea87b2fde89067eec"></a>
+enum <a class="el" href="lemon_8c.html#ab2a0d6d6b60483efa63ba6ff5922790a">cfgstatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#afdf08b6387e26bcea87b2fde89067eec">status</a></td></tr>
+<tr class="memdesc:afdf08b6387e26bcea87b2fde89067eec"><td class="mdescLeft">&#160;</td><td class="mdescRight">指示fellow集的处理过程是否结束(两种情况:INCOMPLETE/COMPLETE),另外也作为计算移进(shift)的指示标志 <br /></td></tr>
+<tr class="separator:afdf08b6387e26bcea87b2fde89067eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80193cbd04fe719812dc0afb71a33664"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80193cbd04fe719812dc0afb71a33664"></a>
+struct <a class="el" href="structconfig.html">config</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#a80193cbd04fe719812dc0afb71a33664">next</a></td></tr>
+<tr class="memdesc:a80193cbd04fe719812dc0afb71a33664"><td class="mdescLeft">&#160;</td><td class="mdescRight">在当前状态中所有config链表的下一个config (next configuration) <br /></td></tr>
+<tr class="separator:a80193cbd04fe719812dc0afb71a33664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b790fb1757e3950f7a4cfca10e2b8a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b790fb1757e3950f7a4cfca10e2b8a7"></a>
+struct <a class="el" href="structconfig.html">config</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig.html#a3b790fb1757e3950f7a4cfca10e2b8a7">bp</a></td></tr>
+<tr class="memdesc:a3b790fb1757e3950f7a4cfca10e2b8a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">在当前状态中基本config链表的下一个config (next basis configuration) <br /></td></tr>
+<tr class="separator:a3b790fb1757e3950f7a4cfca10e2b8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>config结构体 </p>
+<div class="textblock"><p>config结构体,config是对rule进行处理后的结果 </p>
 
-<p>Definition at line <a class="el" href="lemon_8c_source.html#l00144">144</a> of file <a class="el" href="lemon_8c_source.html">lemon.c</a>.</p>
+<p>Definition at line <a class="el" href="lemon_8c_source.html#l00163">163</a> of file <a class="el" href="lemon_8c_source.html">lemon.c</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="lemon_8c_source.html">lemon.c</a></li>
 </ul>

@@ -81,6 +81,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structrule-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">rule Struct Reference</div>  </div>
 </div><!--header-->
@@ -88,6 +91,98 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>rule(文法规则)结构体  
  <a href="structrule.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for rule:</div>
+<div class="dyncontent">
+<div class="center"><img src="structrule__coll__graph.png" border="0" usemap="#rule_coll__map" alt="Collaboration graph"/></div>
+<map name="rule_coll__map" id="rule_coll__map">
+<area shape="rect" id="node2" href="structsymbol.html" title="symbol(符号)结构体 " alt="" coords="9,128,73,155"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:af3ef4d474e6a20c17fe3be8adcd460c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3ef4d474e6a20c17fe3be8adcd460c9"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#af3ef4d474e6a20c17fe3be8adcd460c9">lhs</a></td></tr>
+<tr class="memdesc:af3ef4d474e6a20c17fe3be8adcd460c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">文法规则定义符(::=)左边的符号 <br /></td></tr>
+<tr class="separator:af3ef4d474e6a20c17fe3be8adcd460c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf603fa2ccdfbf1b46778f7e121b4cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9bf603fa2ccdfbf1b46778f7e121b4cd"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a9bf603fa2ccdfbf1b46778f7e121b4cd">lhsalias</a></td></tr>
+<tr class="memdesc:a9bf603fa2ccdfbf1b46778f7e121b4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">上面lhs符号的别名,如果没有别名则为空指针.例如: expr(A)::=expr(B),其中A就是左边expr的别名 <br /></td></tr>
+<tr class="separator:a9bf603fa2ccdfbf1b46778f7e121b4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6b29fa0607b1f508e54298eccbedf5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad6b29fa0607b1f508e54298eccbedf5c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#ad6b29fa0607b1f508e54298eccbedf5c">lhsStart</a></td></tr>
+<tr class="memdesc:ad6b29fa0607b1f508e54298eccbedf5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">当rule左边的符号(lhs)是一个开始符号则lhsStart=true. <br /></td></tr>
+<tr class="separator:ad6b29fa0607b1f508e54298eccbedf5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158fe6ceafc848655ec981f3f8cc1a7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a158fe6ceafc848655ec981f3f8cc1a7e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a158fe6ceafc848655ec981f3f8cc1a7e">ruleline</a></td></tr>
+<tr class="memdesc:a158fe6ceafc848655ec981f3f8cc1a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">文法规则的行号 <br /></td></tr>
+<tr class="separator:a158fe6ceafc848655ec981f3f8cc1a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa96168d20a55ca25150e6cbd4fe25a58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa96168d20a55ca25150e6cbd4fe25a58"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#aa96168d20a55ca25150e6cbd4fe25a58">nrhs</a></td></tr>
+<tr class="memdesc:aa96168d20a55ca25150e6cbd4fe25a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">rule定义符(::=)右边所有符号的个数(包括终结符和非终结符) <br /></td></tr>
+<tr class="separator:aa96168d20a55ca25150e6cbd4fe25a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f31eea5a96ca6459b6ceef1bdd69817"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f31eea5a96ca6459b6ceef1bdd69817"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a1f31eea5a96ca6459b6ceef1bdd69817">rhs</a></td></tr>
+<tr class="memdesc:a1f31eea5a96ca6459b6ceef1bdd69817"><td class="mdescLeft">&#160;</td><td class="mdescRight">rule定义符(::=)右边所有的符号指针组成的数组 <br /></td></tr>
+<tr class="separator:a1f31eea5a96ca6459b6ceef1bdd69817"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea258ae4bacb7d8d4ace588b521b29aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea258ae4bacb7d8d4ace588b521b29aa"></a>
+const char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#aea258ae4bacb7d8d4ace588b521b29aa">rhsalias</a></td></tr>
+<tr class="memdesc:aea258ae4bacb7d8d4ace588b521b29aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">rule定义符(::=)右边所有符号的别名,同样是一个指针数组 <br /></td></tr>
+<tr class="separator:aea258ae4bacb7d8d4ace588b521b29aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d834a168ea936d857d83b6ec36c394e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d834a168ea936d857d83b6ec36c394e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a6d834a168ea936d857d83b6ec36c394e">line</a></td></tr>
+<tr class="memdesc:a6d834a168ea936d857d83b6ec36c394e"><td class="mdescLeft">&#160;</td><td class="mdescRight">在rule最右边C动作代码开始处的行号 <br /></td></tr>
+<tr class="separator:a6d834a168ea936d857d83b6ec36c394e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3d33c0a4df95959e316afb36c2ca080"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3d33c0a4df95959e316afb36c2ca080"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#ad3d33c0a4df95959e316afb36c2ca080">code</a></td></tr>
+<tr class="memdesc:ad3d33c0a4df95959e316afb36c2ca080"><td class="mdescLeft">&#160;</td><td class="mdescRight">当rule执行归约(REDUCE)时需要执行的C代码 <br /></td></tr>
+<tr class="separator:ad3d33c0a4df95959e316afb36c2ca080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a8c8f1aef5ba2ce27fdf39b146228af"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a8c8f1aef5ba2ce27fdf39b146228af"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a5a8c8f1aef5ba2ce27fdf39b146228af">codePrefix</a></td></tr>
+<tr class="memdesc:a5a8c8f1aef5ba2ce27fdf39b146228af"><td class="mdescLeft">&#160;</td><td class="mdescRight">在code[]前面的Setup code ?? <br /></td></tr>
+<tr class="separator:a5a8c8f1aef5ba2ce27fdf39b146228af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88c5f856e7de01a45f689a8b5eeaf514"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88c5f856e7de01a45f689a8b5eeaf514"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a88c5f856e7de01a45f689a8b5eeaf514">codeSuffix</a></td></tr>
+<tr class="memdesc:a88c5f856e7de01a45f689a8b5eeaf514"><td class="mdescLeft">&#160;</td><td class="mdescRight">在code[]后面的Breakdown code ?? <br /></td></tr>
+<tr class="separator:a88c5f856e7de01a45f689a8b5eeaf514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0885bb542fcf51ae3d4a333f7d5e0dcd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0885bb542fcf51ae3d4a333f7d5e0dcd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a0885bb542fcf51ae3d4a333f7d5e0dcd">noCode</a></td></tr>
+<tr class="memdesc:a0885bb542fcf51ae3d4a333f7d5e0dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">如果当前rule没有与之相关的C代码,则noCode=true <br /></td></tr>
+<tr class="separator:a0885bb542fcf51ae3d4a333f7d5e0dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb8acdfc080cacf554ed4144da5f2f03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb8acdfc080cacf554ed4144da5f2f03"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#afb8acdfc080cacf554ed4144da5f2f03">codeEmitted</a></td></tr>
+<tr class="memdesc:afb8acdfc080cacf554ed4144da5f2f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">如果代码已经被提交(emitted)则codeEmitted=true <br /></td></tr>
+<tr class="separator:afb8acdfc080cacf554ed4144da5f2f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b88c69ede5e1e148b4528ff0c9ccbec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b88c69ede5e1e148b4528ff0c9ccbec"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a4b88c69ede5e1e148b4528ff0c9ccbec">precsym</a></td></tr>
+<tr class="memdesc:a4b88c69ede5e1e148b4528ff0c9ccbec"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前rule具有优先级的符号 <br /></td></tr>
+<tr class="separator:a4b88c69ede5e1e148b4528ff0c9ccbec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c564aa2e092eb84b9a7a4368fb885a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89c564aa2e092eb84b9a7a4368fb885a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a89c564aa2e092eb84b9a7a4368fb885a">index</a></td></tr>
+<tr class="memdesc:a89c564aa2e092eb84b9a7a4368fb885a"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前rule的索引 <br /></td></tr>
+<tr class="separator:a89c564aa2e092eb84b9a7a4368fb885a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385b82413a7000a6ee00920796e69659"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a385b82413a7000a6ee00920796e69659"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a385b82413a7000a6ee00920796e69659">iRule</a></td></tr>
+<tr class="memdesc:a385b82413a7000a6ee00920796e69659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rule number as used in the generated tables. <br /></td></tr>
+<tr class="separator:a385b82413a7000a6ee00920796e69659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0071dadc114152f8ebfb4b238c6e6d68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0071dadc114152f8ebfb4b238c6e6d68"></a>
+<a class="el" href="lemon_8c.html#ae7d38601dfbd73adbe5c1b3ec34e0e13">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a0071dadc114152f8ebfb4b238c6e6d68">canReduce</a></td></tr>
+<tr class="memdesc:a0071dadc114152f8ebfb4b238c6e6d68"><td class="mdescLeft">&#160;</td><td class="mdescRight">代表当前rule能否被归约 <br /></td></tr>
+<tr class="separator:a0071dadc114152f8ebfb4b238c6e6d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d79826b2f086404c24f1d053b6f562b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d79826b2f086404c24f1d053b6f562b"></a>
+<a class="el" href="lemon_8c.html#ae7d38601dfbd73adbe5c1b3ec34e0e13">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a1d79826b2f086404c24f1d053b6f562b">doesReduce</a></td></tr>
+<tr class="memdesc:a1d79826b2f086404c24f1d053b6f562b"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否优化过Reduce actions(归约动作) <br /></td></tr>
+<tr class="separator:a1d79826b2f086404c24f1d053b6f562b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab6a3ef5170b0d13e36427abb6f40b26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab6a3ef5170b0d13e36427abb6f40b26"></a>
+struct <a class="el" href="structrule.html">rule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#aab6a3ef5170b0d13e36427abb6f40b26">nextlhs</a></td></tr>
+<tr class="memdesc:aab6a3ef5170b0d13e36427abb6f40b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">指向由具有相同的左边符号(lhs)构成的链表的下一个rule指针 <br /></td></tr>
+<tr class="separator:aab6a3ef5170b0d13e36427abb6f40b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f774bc10d228f1949db6a601ff8e4f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9f774bc10d228f1949db6a601ff8e4f9"></a>
+struct <a class="el" href="structrule.html">rule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrule.html#a9f774bc10d228f1949db6a601ff8e4f9">next</a></td></tr>
+<tr class="memdesc:a9f774bc10d228f1949db6a601ff8e4f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">指向由所有rule构成的全局链表的下一个rule指针 <br /></td></tr>
+<tr class="separator:a9f774bc10d228f1949db6a601ff8e4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>rule(文法规则)结构体 </p>
 
