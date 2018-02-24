@@ -1,0 +1,5 @@
+<map id="s_x2" name="s_x2">
+<area shape="rect" id="node2" href="$structs__x2node.html" title="类似于s_x1node,区别在于s_x2node是来储存symbol(符号)的 " alt="" coords="5,188,84,215"/>
+<area shape="rect" id="node3" href="$structsymbol.html" title="symbol(符号)结构体 " alt="" coords="13,96,77,123"/>
+<area shape="rect" id="node4" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="23,5,66,32"/>
+</map>

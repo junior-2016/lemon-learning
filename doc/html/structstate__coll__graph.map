@@ -1,0 +1,5 @@
+<map id="state" name="state">
+<area shape="rect" id="node2" href="$structconfig.html" title="config结构体 " alt="" coords="5,5,63,32"/>
+<area shape="rect" id="node3" href="$structaction.html" title="action结构体 " alt="" coords="87,5,144,32"/>
+<area shape="rect" id="node4" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="169,5,211,32"/>
+</map>
