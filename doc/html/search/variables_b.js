@@ -4,7 +4,7 @@ var searchData=
   ['name',['name',['../structsymbol.html#a778e02d22328bbdfe636fd90ddaf94c3',1,'symbol::name()'],['../structlemon.html#a278763cc1efb250e51a339e6ece76779',1,'lemon::name()']]],
   ['nconflict',['nconflict',['../structlemon.html#a32cffc536c6549297e55b847d6ace646',1,'lemon']]],
   ['ndefine',['nDefine',['../lemon_8c.html#a4fd7e671b38c8039ac8271eb78b10e7b',1,'lemon.c']]],
-  ['next',['next',['../structrule.html#a9f774bc10d228f1949db6a601ff8e4f9',1,'rule::next()'],['../structconfig.html#a80193cbd04fe719812dc0afb71a33664',1,'config::next()'],['../structs__x1node.html#a37cd457ffb6ec518eda9d8f09e777f37',1,'s_x1node::next()'],['../structs__x2node.html#ac9edb947528c1ce035c50b263a0211ab',1,'s_x2node::next()']]],
+  ['next',['next',['../structrule.html#a9f774bc10d228f1949db6a601ff8e4f9',1,'rule::next()'],['../structconfig.html#a80193cbd04fe719812dc0afb71a33664',1,'config::next()'],['../structaction.html#ac28cb9e021b566c2a6ce19f1a3351a57',1,'action::next()'],['../structs__x1node.html#a37cd457ffb6ec518eda9d8f09e777f37',1,'s_x1node::next()'],['../structs__x2node.html#ac9edb947528c1ce035c50b263a0211ab',1,'s_x2node::next()']]],
   ['nextlhs',['nextlhs',['../structrule.html#aab6a3ef5170b0d13e36427abb6f40b26',1,'rule']]],
   ['nlookaheadtab',['nlookaheadtab',['../structlemon.html#ac7ec5dea549432270e42d679ee0f79d3',1,'lemon']]],
   ['nntact',['nNtAct',['../structstate.html#a1e83b06b14c77fff6ca0cd1439991a3a',1,'state']]],

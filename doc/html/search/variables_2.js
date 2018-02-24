@@ -6,5 +6,6 @@ var searchData=
   ['codeemitted',['codeEmitted',['../structrule.html#afb8acdfc080cacf554ed4144da5f2f03',1,'rule']]],
   ['codeprefix',['codePrefix',['../structrule.html#a5a8c8f1aef5ba2ce27fdf39b146228af',1,'rule']]],
   ['codesuffix',['codeSuffix',['../structrule.html#a88c5f856e7de01a45f689a8b5eeaf514',1,'rule']]],
+  ['collide',['collide',['../structaction.html#ac7927e28b23531ef0e799d618debc9bb',1,'action']]],
   ['count',['count',['../structs__x1.html#a6caa9df6ff72618f02a7128680d1a88d',1,'s_x1::count()'],['../structs__x2.html#a1767489fb2e9c38a4be6207943962a01',1,'s_x2::count()']]]
 ];

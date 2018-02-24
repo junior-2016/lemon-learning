@@ -172,24 +172,32 @@ struct config{
     struct config *bp;     ///< 在当前状态中基本config链表的下一个config (next basis configuration)
 };
 
-/// \brief
+/// \brief 动作类型枚举
 enum e_action{
-    SHIFT,
-    ACCEPT,
-    REDUCE,
-    ERROR,
-    SSCONFLICT,
-    SRCONFLICT,
-    RRCONFLICT,
-    SH_RESOLVED,
-    RD_RESOLVED,
-    NOT_USED,
-    SHIFTREDUCE
+    SHIFT,       ///< 移进(将先行符号(look-ahead symbol)移入语法分析栈)
+    ACCEPT,      ///< 接受,表示整一个.y语法文件分析成功,无错误
+    REDUCE,      ///< 已到达rule的末尾,可以对rule进行归约
+    ERROR,       ///< 正在处理的符号无法解读而出错
+    SSCONFLICT,  ///< 移进时冲突
+    SRCONFLICT,  ///< 归约时部分冲突
+    RRCONFLICT,  ///< 归约时部分冲突
+    SH_RESOLVED, ///< 用优先级解决移进冲突
+    RD_RESOLVED, ///< 用优先级解决归约冲突
+    NOT_USED,    ///< 无用动作,在压缩时会被删除
+    SHIFTREDUCE  ///< 先移进后归约
 };
 
 /// \brief action结构体
 struct action{
-
+    struct symbol *sp;     ///< 在采取动作之前搜索的栈外正等待处理的符号
+    enum e_action type;    ///< 动作类型
+    union {
+        struct state *stp; ///< 如果当前动作是移进,union结构体就取stp这个状态指针,代表移进语法符号后将进入的新状态
+        struct rule *rp;   ///< 如果当前动作是归约,union结构体取rp这个rule指针,代表归约时需要利用的rule
+    } x; ///< Union结构体,Union结构体实际储存时只能包含一个成员
+    struct symbol *spOpt;  ///< 需要进行SHIFTREDUCE(移进归约)优化的符号
+    struct action *next;   ///< 位于同一状态的下一个动作
+    struct action *collide;///< 具有相同哈希值的下一个动作
 };
 
 /// \brief state结构体

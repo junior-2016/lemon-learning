@@ -81,6 +81,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structaction-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">action Struct Reference</div>  </div>
 </div><!--header-->
@@ -88,6 +91,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>action结构体  
  <a href="structaction.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for action:</div>
+<div class="dyncontent">
+<div class="center"><img src="structaction__coll__graph.png" border="0" usemap="#action_coll__map" alt="Collaboration graph"/></div>
+<map name="action_coll__map" id="action_coll__map">
+<area shape="rect" id="node4" href="structstate.html" title="state结构体 " alt="" coords="193,325,244,352"/>
+<area shape="rect" id="node2" href="structsymbol.html" title="symbol(符号)结构体 " alt="" coords="5,128,69,155"/>
+<area shape="rect" id="node3" href="structrule.html" title="rule(文法规则)结构体 " alt="" coords="169,7,212,33"/>
+<area shape="rect" id="node5" href="structconfig.html" title="config结构体,config是对rule进行处理后的结果 " alt="" coords="243,431,301,457"/>
+<area shape="rect" id="node6" href="structplink.html" title="plink结构体 " alt="" coords="247,536,297,563"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a8bb419de6aa7116057d284c32003e623"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8bb419de6aa7116057d284c32003e623"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaction.html#a8bb419de6aa7116057d284c32003e623">sp</a></td></tr>
+<tr class="memdesc:a8bb419de6aa7116057d284c32003e623"><td class="mdescLeft">&#160;</td><td class="mdescRight">在采取动作之前搜索的栈外正等待处理的符号 <br /></td></tr>
+<tr class="separator:a8bb419de6aa7116057d284c32003e623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0dce56259e3c49ee6a14e738ac63f0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0dce56259e3c49ee6a14e738ac63f0d"></a>
+enum <a class="el" href="lemon_8c.html#a9695563ba2c3d4e59f4680439da60d8b">e_action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaction.html#ac0dce56259e3c49ee6a14e738ac63f0d">type</a></td></tr>
+<tr class="memdesc:ac0dce56259e3c49ee6a14e738ac63f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">动作类型 <br /></td></tr>
+<tr class="separator:ac0dce56259e3c49ee6a14e738ac63f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fed57e820c901742703ac0a02ebf44f"><td class="memItemLeft" ><a class="anchor" id="a3fed57e820c901742703ac0a02ebf44f"></a>
+union {</td></tr>
+<tr class="memitem:ac62bf30db28312c97e948717b0701a86"><td class="memItemLeft" >
+&#160;&#160;&#160;struct <a class="el" href="structstate.html">state</a> *&#160;&#160;&#160;<a class="el" href="structaction.html#a5642dd2fd42e8fcd1dbe242e7a9386ce">stp</a></td></tr>
+<tr class="memdesc:ac62bf30db28312c97e948717b0701a86"><td class="mdescLeft">&#160;</td><td class="mdescRight">如果当前动作是移进,union结构体就取stp这个状态指针,代表移进语法符号后将进入的新状态 <br /></td></tr>
+<tr class="separator:ac62bf30db28312c97e948717b0701a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a989781e5d588f759c36107049456b667"><td class="memItemLeft" >
+&#160;&#160;&#160;struct <a class="el" href="structrule.html">rule</a> *&#160;&#160;&#160;<a class="el" href="structaction.html#af3ef54d83f6ee6fabe6200fff85e60be">rp</a></td></tr>
+<tr class="memdesc:a989781e5d588f759c36107049456b667"><td class="mdescLeft">&#160;</td><td class="mdescRight">如果当前动作是归约,union结构体取rp这个rule指针,代表归约时需要利用的rule <br /></td></tr>
+<tr class="separator:a989781e5d588f759c36107049456b667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fed57e820c901742703ac0a02ebf44f"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaction.html#a3fed57e820c901742703ac0a02ebf44f">x</a></td></tr>
+<tr class="memdesc:a3fed57e820c901742703ac0a02ebf44f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Union结构体,Union结构体实际储存时只能包含一个成员 <br /></td></tr>
+<tr class="separator:a3fed57e820c901742703ac0a02ebf44f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34da56f0125f67a24b8c99392cbc5084"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34da56f0125f67a24b8c99392cbc5084"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaction.html#a34da56f0125f67a24b8c99392cbc5084">spOpt</a></td></tr>
+<tr class="memdesc:a34da56f0125f67a24b8c99392cbc5084"><td class="mdescLeft">&#160;</td><td class="mdescRight">需要进行SHIFTREDUCE(移进归约)优化的符号 <br /></td></tr>
+<tr class="separator:a34da56f0125f67a24b8c99392cbc5084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac28cb9e021b566c2a6ce19f1a3351a57"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac28cb9e021b566c2a6ce19f1a3351a57"></a>
+struct <a class="el" href="structaction.html">action</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaction.html#ac28cb9e021b566c2a6ce19f1a3351a57">next</a></td></tr>
+<tr class="memdesc:ac28cb9e021b566c2a6ce19f1a3351a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">位于同一状态的下一个动作 <br /></td></tr>
+<tr class="separator:ac28cb9e021b566c2a6ce19f1a3351a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7927e28b23531ef0e799d618debc9bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7927e28b23531ef0e799d618debc9bb"></a>
+struct <a class="el" href="structaction.html">action</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaction.html#ac7927e28b23531ef0e799d618debc9bb">collide</a></td></tr>
+<tr class="memdesc:ac7927e28b23531ef0e799d618debc9bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">具有相同哈希值的下一个动作 <br /></td></tr>
+<tr class="separator:ac7927e28b23531ef0e799d618debc9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>action结构体 </p>
 

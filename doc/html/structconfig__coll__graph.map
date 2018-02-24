@@ -1,7 +1,7 @@
 <map id="config" name="config">
-<area shape="rect" id="node2" href="$structplink.html" title="plink结构体 " alt="" coords="24,233,73,260"/>
-<area shape="rect" id="node3" href="$structstate.html" title="state结构体 " alt="" coords="170,233,221,260"/>
-<area shape="rect" id="node4" href="$structaction.html" title="action结构体 " alt="" coords="320,128,377,155"/>
-<area shape="rect" id="node5" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="233,7,275,33"/>
-<area shape="rect" id="node6" href="$structsymbol.html" title="symbol(符号)结构体 " alt="" coords="402,128,466,155"/>
+<area shape="rect" id="node2" href="$structplink.html" title="plink结构体 " alt="" coords="53,325,102,352"/>
+<area shape="rect" id="node3" href="$structstate.html" title="state结构体 " alt="" coords="191,325,241,352"/>
+<area shape="rect" id="node4" href="$structaction.html" title="action结构体 " alt="" coords="187,416,245,443"/>
+<area shape="rect" id="node5" href="$structsymbol.html" title="symbol(符号)结构体 " alt="" coords="64,7,128,33"/>
+<area shape="rect" id="node6" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="156,128,199,155"/>
 </map>

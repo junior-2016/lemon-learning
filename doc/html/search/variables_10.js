@@ -5,5 +5,5 @@ var searchData=
   ['tokendest',['tokendest',['../structlemon.html#a13e8e51c24bb346fd0d4130037e47674',1,'lemon']]],
   ['tokenprefix',['tokenprefix',['../structlemon.html#a745b25b33fa6f9843f714959e57249cd',1,'lemon']]],
   ['tokentype',['tokentype',['../structlemon.html#a5a8197998a3b44a5aebfa1c3656284d7',1,'lemon']]],
-  ['type',['type',['../structs__options.html#a507483deac8a091d8c3c81c7889b3536',1,'s_options::type()'],['../structsymbol.html#aafff7593df974a98ea04be2b7450091e',1,'symbol::type()']]]
+  ['type',['type',['../structs__options.html#a507483deac8a091d8c3c81c7889b3536',1,'s_options::type()'],['../structsymbol.html#aafff7593df974a98ea04be2b7450091e',1,'symbol::type()'],['../structaction.html#ac0dce56259e3c49ee6a14e738ac63f0d',1,'action::type()']]]
 ];
