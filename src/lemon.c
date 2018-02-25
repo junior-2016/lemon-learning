@@ -119,7 +119,7 @@ struct symbol{
     enum e_assoc assoc; ///< 符号的结合性(注意声明符号的结合性之前必须定义符号的优先级)
     char*firstset;      ///< 在所有文法规则里与这个符号相关的first集
     Boolean lambda;     ///< 如果lambda=true代表非终结符右边的rule可以是一个空字符串(只有非终结符有这个性质)
-    int useCnt;         ///< Number of times used
+    int useCnt;         ///< Number of times used (使用次数)
     char* destructor;   ///< 语法文件中用%destructor{}指定的C语言代码,当符号从栈pop时执行这些代码销毁符号
     int destLineno;     ///< 语法文件里%destructor所在行号,如果是重复的destructor就设为-1
     char* datatype;     ///< 当该符号是非终极符(type==NONTERMINAL)时,就需要指定它的数据类型(在语法文件里以%type声明)
@@ -301,6 +301,11 @@ struct state**State_arrayof(void);
 
 
 
+
+
+
+/* Main()主程序部分 */
+
 /**
  * @brief 内存空间申请失败的错误提示处理
  */
@@ -427,9 +432,14 @@ int main(int argc,char** argv){
     memset(&lem,0, sizeof(lem)); // 初始化lemon结构体空间
     lem.errorcnt=0;              // 如果前面的命令行处理没有问题,这里的errorcnt就应该设置为0
 
-    Strsafe_init();
-    Symbol_init();
-    State_init();
+    Strsafe_init();   // 字符串处理初始化
+    Symbol_init();    // 符号初始化
+    State_init();     // 状态初始化
+
+    lem.argv0=argv[0]; // 储存程序名称
+    lem.filename = OptArg(0);  // 储存语法文件名称
+    lem.basisflag = basisflag; // 储存选项初始化时获得的basisflag,basisflag初始值是0,如果用户输入"-b"选项,处理后basisflag的值为1
+    lem.nolinenosflag=nolinenosflag; // 如果用户输入"-l"选项,则储存的值为1,否则为0
 
 
 }
@@ -466,6 +476,34 @@ static void errline(int n,int k,FILE*err){
         fprintf(err,"\n%*shere --^\n",spcnt-7,"");
     }
 }
+
+/**
+ * @brief 返回命令行参数里面不带"-"/"+"/"="的参数中第n+1个的索引
+ * @see 不带"-"/"+"/"="的命令行参数即非选项参数,其实就是程序名称以及语
+ * 法文件名称,当然在遍历时从argv[1]开始,所以非选项参数基本只剩下语法文件名称的可能了.
+ * 另外通过n指定要取第n+1个非选项参数(n从0开始),如果取不到对应的非选项参数就返回-1.
+ * 理论上,main()函数在初始化代码运行之前已经限制只能处理一个语法文件,
+ * 所以main()函数间接调用argindex(n)时n只能取0,如果取其他的值必然返回-1.
+ * 还有一个要注意,argindex()处理时考虑了dashdash("--")的情况,实际上前面的选项初始化基本排除了
+ * dashdash出现的可能,所以可以忽略dashdash的处理过程.
+ * @param n 用来指定取第n+1个非选项参数,n从0开始.
+ * @return 返回对应非选项参数的索引,如果取不到返回-1
+ */
+static int argindex(int n){
+    int i;
+    int dashdash=0;
+    if (argv!=0 && *argv!=0){
+        for (i=1;argv[i];i++){ // 从argv[1]开始遍历
+            if (dashdash || !ISOPT(argv[i])){ //忽略dashdash,这里只考虑非选项的情况
+                if (n==0) return i; // 如果n等于0,返回索引,
+                n--;                // 否则n减一,继续找下一个非选项参数的索引
+            }
+            if (strcmp(argv[i],"--")==0) dashdash=1;
+        }
+    }
+    return -1; // 搜索不到,返回-1
+}
+
 /**
  * @brief 处理命令行参数中带前缀"+"或"-"的选项,比如lemon -b. 这种参数是没有赋值的.
  * @param i   命令行参数在argv里的索引
@@ -650,7 +688,8 @@ int OptInit(char**a,struct s_options*o,FILE*err){
  * @brief 统计命令行参数中非选项参数(不带'+'/'-'/'=')以及dashdash("--")的个数.
  * 所谓非选项参数即命令行参数中语法文件的名称(以.y为后缀),如果返回值为1则说明语法文件只有一个,
  * 就是正确返回值;如果返回值大于1,说明要处理的语法文件多于一个,就不符合程序要求.
- * 比较奇怪的是,这里的返回值还包含了"--"的个数,就不太清楚其原因???
+ * 比较奇怪的是,这里的返回值还包含了"--"的个数,实际上,在前面OptInit()的过程中,基本上杜绝了"--"的出现,
+ * 因此你可以认为"--"的个数就是0,并不会影响程序的结果.
  * @return 返回非选项参数以及"--"的个数(可以认为是语法文件的个数),按照程序要求正确的返回值是1.
  */
 int OptNArgs(void){
@@ -666,13 +705,15 @@ int OptNArgs(void){
     return cnt;
 }
 /**
- *
- * @param n
- * @return
+ * @brief 返回第n+1个非选项参数(不包括程序名称).取n=0即返回语法文件名称(理论上也只能取n=0,取其他值必然报错)
+ * @param n 指定取第n+1个非选项参数
+ * @return 返回所需的非选项参数
  */
 char* OptArg(int n){
-
+    int i = argindex(n);
+    return i>=0 ? argv[i] : 0; // 如果i>=0返回对应的非选项参数指针,如果i==-1(i<0)则返回空指针.
 }
+
 /**
  *
  * @param n
@@ -732,6 +773,18 @@ void OptPrint(void){
         }
     }
 }
+
+/**
+ * @brief 计算字符串的哈希值:循环字符串,将累计值乘以13再加上字符的ASCII,最后的累计值就是哈希值
+ * @param x
+ * @return
+ */
+static unsigned strhash(const char *x){
+    unsigned h=0;
+    while (*x) h=h*13+*(x++);
+    return h;
+}
+
 
 /// \brief 处理字符串时进行数据储存的结构体
 struct s_x1{
@@ -817,7 +870,71 @@ void Symbol_init(void){
     }
 }
 
-/// \brief 类似于s_x1与s_x2
+/**
+ * @brief 把新符号插入符号数组(x2a的tbl[]数组和ht[]数组)
+ * @param data 待插入的符号指针
+ * @param key  待插入的符号的键值
+ * @return 返回是否插入成功:0(失败);1(成功)
+ */
+int Symbol_insert(struct symbol *data,const char *key){
+
+}
+/**
+ * @brief 安装新符号
+ * @param x 待安装的符号
+ * @return 返回安装后的符号指针
+ */
+struct symbol* Symbol_new(const char*x){
+    struct symbol *sp=Symbol_find(x); // 查找键值为x的符号是否已经存在
+    if (sp==0){ // 如果符号还不存在,就可以安装这个符号
+        sp=(struct symbol*)calloc(1,sizeof(struct symbol));//申请内存块并清零
+        MemoryCheck(sp); //检查内存申请是否成功
+        sp->name=Strsafe(x); // 设置符号的名称
+        sp->type=ISUPPER(*x)?TERMINAL:NONTERMINAL;//按照lemon要求,首字母大写为终结符,小写为非终结符
+        sp->rule=0;     // 设置rule为空指针
+        sp->fallback=0; // 设置fallback为空指针
+        sp->prec=-1;    // 设置优先级为-1
+        sp->assoc=UNK;  // 未知结合性
+        sp->firstset=0; // 设置first set为空
+        sp->lambda=LEMON_FALSE; // 禁用lambda
+        // 其他基本设置为空指针
+        sp->destructor=0;
+        sp->destLineno=0;
+        sp->datatype=0;
+        sp->useCnt=0;
+        Symbol_insert(sp,sp->name); // 把创建的新符号插入符号数组里
+    }
+    sp->useCnt++; // 使用次数加一
+    return sp;
+}
+/**
+ * @brief 查找key(符号名称)对应的符号是否已经存在,
+ * 如果存在返回对应的符号指针,如果不存在返回空指针
+ * @param key 符号的键值(其实是符号的名称)
+ * @return 返回key对应的符号指针(如果不存在则返回空指针)
+ */
+struct symbol *Symbol_find(const char *key){
+    unsigned h; // 用来储存哈希值
+    x2node *np; // symbol节点指针
+    if (x2a==0) return 0; // 这一步基本不会发生,因为前面已经通过Symbol_init()初始化了
+
+    /*
+     * 因为x2a->size-1==127,这一步相当于 hash(x)&(1111111),这样就把hash()的范围约束在[0,127]里,
+     * 当然把大范围的hash()压缩为小范围必然出现哈希冲突,这个程序的排解方法是链表尾插排解冲突
+     */
+    h = strhash(key) & (x2a->size-1);
+
+    np=x2a->ht[h]; // 在哈希表访问key对应的符号指针
+
+    while (np){ // 链表尾插排解冲突
+        if (strcmp(np->key,key)==0) break; // 发现key相同的,直接返回对应的符号指针,
+        np=np->next;                       // 否则,继续链表的下一个指针,直到访问到空指针,说明之前不存在这个符号,就可以把新符号尾插到链表里
+    }
+    return np?np->data:0; // 注意返回的是符号指针而不是符号节点,所以要使用np->data获得节点储存的符号指针
+}
+
+
+/// \brief 类似于s_x1与s_x2的结构
 struct s_x3{
     int size;
     int count;
