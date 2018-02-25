@@ -872,12 +872,87 @@ void Symbol_init(void){
 
 /**
  * @brief 把新符号插入符号数组(x2a的tbl[]数组和ht[]数组)
+ * @see 这个插入算法需要考虑几个问题:
+ * 1)实际数量超过容量时需要扩容,常用的方法是把容量扩充为原来的两倍;
+ * 2)插入时发生哈希冲突时采用链表排解冲突的方法,但是可以尾插也可以头插,这里采用的是头插法;
+ * 3)在x2node(tbl[]元素类型)里有一个from成员,from储存的是一个地址,这个地址对应的内存单元储存了当前x2node的地址值.
+ * 举个例子 (下面用|..|标出结构体成员的储存值,用(..)标出重要内存单元的地址)
+ *
+ * 数组元素    ht[0] (A)    tbl[0] (B)       tbl[1] (C)
+ *           |       |   | next(X): C |   | next(Y): 0,即NULL |
+ * 结构体成员 |  B    |   | from:   A  |   | from:   X         |
+ *
+ * 注意: 1) X是tbl[0]->next的地址; Y是tbl[1]->next的地址.
+ * 2) tbl[0]的key与tbl[1]的key计算出的hash值冲突(hash值都是0),所以才通过next连在一起,并且把链表首节点的地址放在ht[0].
+ *
  * @param data 待插入的符号指针
  * @param key  待插入的符号的键值
  * @return 返回是否插入成功:0(失败);1(成功)
  */
 int Symbol_insert(struct symbol *data,const char *key){
+    x2node *np;
+    unsigned h;
+    unsigned ph;
+    if (x2a==0) return 0; // x2a为空,插入失败
+    ph=strhash(key);    // 计算hash值
+    h=ph&(x2a->size-1); // 约束哈希值范围
+    np=x2a->ht[h];      // 通过哈希值访问对应的链表首节点指针
+    while (np){
+        if (strcmp(np->key,key)==0) {
+            // 如果链表里面已经有相应的符号名称(相同的key),根本无需插入,插入失败
+            return 0;
+        }
+        np=np->next;
+    } // 如果成功退出循环,没有返回0,则需要进行插入
 
+    if (x2a->count>=x2a->size){ // 执行扩容
+        int i,arrSize;
+        struct s_x2 array; // 开辟新的s_x2实例
+        array.size=arrSize=x2a->size*2; // 容量扩大两倍
+        array.count=x2a->count; // 数量保持不变
+        array.tbl=(x2node*)calloc(arrSize, sizeof(x2node)+ sizeof(x2node*));//申请新的tbl内存
+        if (array.tbl==0) return 0; // 申请tbl[]失败
+        array.ht=(x2node**)&(array.tbl[arrSize]); // 初始化哈希表首地址
+        for (i=0,i<arrSize;i++){
+            array.ht[i]=0; // 清零ht[]
+        }
+        for (i=0;i<x2a->count;i++){ // 把原来旧的x2a成员移植到新的array成员里
+            x2node *oldnp, *newnp;
+            oldnp=&(x2a->tbl[i]);
+            h=strhash(oldnp->key) &(arrSize-1); // 重新约束hash()的范围(因为size变化了)
+            newnp=&(array.tbl[i]);
+
+            /*
+             * 注意后面的链表排解冲突采用头插法
+             */
+            if (array.ht[h]){ // 如果array[h]之前储存了一个节点的地址
+                // 这里的array[h]储存是上一次刚刚占据array[h]的节点指针,
+                // 但是后面我们排解冲突,要把它挤出去,让newnp作为链表的首指针(头插法),
+                // 而此时的array[h]指针将作为newnp->next储存的值,
+                // 当然就需要修改当前的array[h]指针的from为newnp->next的地址.
+                array[h]->from = &(newnp->next);
+            }
+            newnp->next=array.ht[h];
+            newnp->key=oldnp->key;
+            newnp->data=oldnp->data;
+            newnp->from=&(array.ht[h]); //后面一步要把newnp放在array.ht[h]里,那么这里自然需要让newnp->from储存array.ht[h]的地址值
+            array.ht[h]=newnp;
+        }
+        // 注意的是tbl[]与ht[]是连在一起的一整块内存,而x2a->tbl是这整一块内存的首地址,所以free(x2a->tbl)等同于同时释放tbl[]和ht[].
+        free(x2a->tbl);
+        *x2a=array; // 让x2a指向array的内存空间.这样x2a依然能够代表s_x2唯一实例的地址.
+    }
+
+    // 插入新数据(注意下面的x2a已经是扩容后的),基本的操作与前面类似
+    h=ph&(x2a->size-1);
+    np=&(x2a->tbl[x2a->count++]);
+    np->key=key;
+    np->data=data;
+    if (x2a->ht[h]) x2a->ht[h]->from=&(np->next);
+    np->next=x2a->ht[h];
+    x2a->ht[h]=np;
+    np->from=&(x2a->ht[h]);
+    return 1; // 插入成功
 }
 /**
  * @brief 安装新符号
@@ -920,15 +995,15 @@ struct symbol *Symbol_find(const char *key){
 
     /*
      * 因为x2a->size-1==127,这一步相当于 hash(x)&(1111111),这样就把hash()的范围约束在[0,127]里,
-     * 当然把大范围的hash()压缩为小范围必然出现哈希冲突,这个程序的排解方法是链表尾插排解冲突
+     * 当然把大范围的hash()压缩为小范围必然出现哈希冲突,这个程序的排解方法是链表排解冲突,所以需要进行一轮链表遍历.
      */
     h = strhash(key) & (x2a->size-1);
 
-    np=x2a->ht[h]; // 在哈希表访问key对应的符号指针
+    np=x2a->ht[h]; // 在哈希表访问key对应的符号指针(链表首指针)
 
-    while (np){ // 链表尾插排解冲突
+    while (np){   // 遍历搜索链表,O(n)时间
         if (strcmp(np->key,key)==0) break; // 发现key相同的,直接返回对应的符号指针,
-        np=np->next;                       // 否则,继续链表的下一个指针,直到访问到空指针,说明之前不存在这个符号,就可以把新符号尾插到链表里
+        np=np->next;                       // 否则,继续链表的下一个指针,直到访问到空指针,说明之前不存在这个符号
     }
     return np?np->data:0; // 注意返回的是符号指针而不是符号节点,所以要使用np->data获得节点储存的符号指针
 }
