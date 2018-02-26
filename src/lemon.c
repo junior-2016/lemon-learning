@@ -785,6 +785,27 @@ static unsigned strhash(const char *x){
     return h;
 }
 
+/**
+ * @brief 创建安全的字符串,并返回相应的字符串指针.之所以称为"安全的"是因为它确保了
+ * 相同的字符串只有一个,如果在s_x1结构体实例x1a里面已经拥有参数y对应的字符串值,
+ * 直接返回其地址即可;如果没有则需要把参数y对应的字符串插入x1a的数组里面,再返回字符串相应的指针.
+ * 这有点类似于Java的字符串常量池技术.
+ * @param y 请求创建的字符串(y唯一的作用是提供字符串的值*y)
+ * @return 正确创建字符串后的指针(字符串在常量池的地址)
+ */
+const char* Strsafe(const char*y){
+    const char *z;
+    char *cpy; // 用来复制y的值
+    if (y==0) return 0; // 空指针无需创建
+    z=Strsafe_find(y);  // 在字符串常量池(x1a->ht[])里搜索是否存在与*y相同的字符串,如果存在(z不为空指针)则跳过下面的if,直接返回z.
+    if (z==0 &&(cpy=(char*)malloc(lemonStrlen(y)+1))!=0){ // 满足两个条件:搜索后z为空指针;申请cpy的空间成功,才能继续往字符串常量池插入z
+        lemon_strcpy(cpy,y);
+        z=cpy;
+        Strsafe_insert(z);
+    }
+    MemoryCheck(z); // 检查z的合法性,正常情况下z不应该为空.
+    return z;
+}
 
 /// \brief 处理字符串时进行数据储存的结构体
 struct s_x1{
@@ -831,6 +852,80 @@ void Strsafe_init(void){
         }
     }
 }
+
+/**
+ * @brief 把字符串data插入x1a管理的字符串常量池里
+ * @see 相关代码实现与Symbol_insert()类似
+ * @param data 待插入的字符串
+ * @return 插入成功与否
+ */
+int Strsafe_insert(const char *data){
+    x1node *np;
+    unsigned h;
+    unsigned ph;
+
+    if (x1a==0) return 0;
+    ph=strhash(data);
+    h=ph&(x1a->size-1);
+    np=x1a->ht[h];
+    while (np){
+        if (strcmp(np->data,data)==0) {
+            return 0;
+        }
+        np=np->next;
+    }
+    if (x1a->count>=x1a->size){ // 容量不足
+        int i,arrSize;
+        struct s_x1 array;
+        array.size=arrSize=x1a->size*2;
+        array.count=x1a->count;
+        array.tbl=(x1node*)calloc(arrSize, sizeof(x1node)+ sizeof(x1node*));
+        if (array.tbl==0) return 0;
+        array.ht=(x1node**)&(array.tbl[arrSize]);
+        for (i=0;i<arrSize;i++) array.ht[i]=0;
+        for (i=0;i<x1a->count;i++){
+            x1node *oldnp, *newnp;
+            oldnp=&(x1a->tbl[i]);
+            newnp=&(array.tbl[i]);
+            h=strhash(oldnp->data)&(arrSize-1);
+            if (array.ht[h]) array.ht[h]->from=&(newnp->next);
+            newnp->next=array.ht[h];
+            newnp->data=oldnp->data;
+            newnp->from=&(array.ht[h]);
+            array.ht[h]=newnp;
+        }
+        free(x1a->tbl);
+        *x1a=array;
+    }
+    h=ph&(x1a->size-1);
+    np=&(x1a->tbl[x1a->count++]);
+    np->data=data;
+    if (x1a->ht[h]) x1a->ht[h]->from=&(np->next);
+    np->next=x1a->ht[h];
+    x1a->ht[h]=np;
+    np->from=&(x1a->ht[h]);
+    return 1;
+}
+/**
+ * @brief 在字符串常量池(x1a->ht[])里搜索与key相同的字符串,如果存在返回它在字符串常量池的指针,
+ * 如果没有返回空指针
+ * @see 函数处理过程与Symbol_find()基本相同
+ * @param key 待搜索的字符串
+ * @return 返回与key相同的字符串在常量池(x1a->ht[])的指针
+ */
+const char* Strsafe_find(const char * key){
+    unsigned h;
+    x1node *np;
+    if (x1a==0) return 0;
+    h=strhash(key)&(x1a->size-1);
+    np=x1a->ht[h];
+    while (np){
+        if (strcmp(np->data,key)==0) break;
+        np=np->next;
+    }
+    return np?np->data:0;
+}
+
 
 /// \brief 类似于s_x1的结构
 struct s_x2{
@@ -913,10 +1008,10 @@ int Symbol_insert(struct symbol *data,const char *key){
         array.tbl=(x2node*)calloc(arrSize, sizeof(x2node)+ sizeof(x2node*));//申请新的tbl内存
         if (array.tbl==0) return 0; // 申请tbl[]失败
         array.ht=(x2node**)&(array.tbl[arrSize]); // 初始化哈希表首地址
-        for (i=0,i<arrSize;i++){
+        for (i=0; i<arrSize; i++){
             array.ht[i]=0; // 清零ht[]
         }
-        for (i=0;i<x2a->count;i++){ // 把原来旧的x2a成员移植到新的array成员里
+        for (i=0; i<x2a->count; i++){ // 把原来旧的x2a成员移植到新的array成员里
             x2node *oldnp, *newnp;
             oldnp=&(x2a->tbl[i]);
             h=strhash(oldnp->key) &(arrSize-1); // 重新约束hash()的范围(因为size变化了)
@@ -930,7 +1025,7 @@ int Symbol_insert(struct symbol *data,const char *key){
                 // 但是后面我们排解冲突,要把它挤出去,让newnp作为链表的首指针(头插法),
                 // 而此时的array[h]指针将作为newnp->next储存的值,
                 // 当然就需要修改当前的array[h]指针的from为newnp->next的地址.
-                array[h]->from = &(newnp->next);
+                array.ht[h]->from = &(newnp->next);
             }
             newnp->next=array.ht[h];
             newnp->key=oldnp->key;
