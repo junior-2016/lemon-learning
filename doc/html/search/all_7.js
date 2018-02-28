@@ -4,6 +4,7 @@ var searchData=
   ['include',['include',['../structlemon.html#a28f30e75b7f399aa335adc47a32f46cb',1,'lemon']]],
   ['incomplete',['INCOMPLETE',['../lemon_8c.html#ab2a0d6d6b60483efa63ba6ff5922790aa0a00da50814c46c6e714304c1bdd35e7',1,'lemon.c']]],
   ['index',['index',['../structsymbol.html#a1aa96687297a13a207e48b4d8f3ba78b',1,'symbol::index()'],['../structrule.html#a89c564aa2e092eb84b9a7a4368fb885a',1,'rule::index()']]],
+  ['initialize',['INITIALIZE',['../lemon_8c.html#a74a75e4700f1f71bb89d80765319e57bab0c48e95b68bff1f7820e23b8fd0bc98',1,'lemon.c']]],
   ['intofst',['iNtOfst',['../structstate.html#a76c5eafaf09d92e514623f3f3171fba6',1,'state']]],
   ['irule',['iRule',['../structrule.html#a385b82413a7000a6ee00920796e69659',1,'rule']]],
   ['isalnum',['ISALNUM',['../lemon_8c.html#a1cb5d5dd0c364d720854e8a250967dd1',1,'lemon.c']]],

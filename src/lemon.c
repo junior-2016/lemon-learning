@@ -90,6 +90,9 @@ char* OptArg(int);
 void OptErr(int);
 void OptPrint(void);
 
+/* 词法分析函数Parse */
+void Parse(struct lemon *lemp);
+
 /* lemon 共享struct */
 /// \brief lemon布尔常量枚举
 typedef enum {LEMON_FALSE=0,LEMON_TRUE} Boolean;
@@ -777,6 +780,61 @@ void OptPrint(void){
                 break;
         }
     }
+}
+
+/* Parser(词法分析器)相关实现 */
+
+/// \brief Parser状态枚举
+enum e_state{
+    INITIALIZE, ///< 初始状态
+    WAITING_FOR_DECL_OR_RULE, ///< 等待输入特殊申明符或rule
+    WAITING_FOR_DECL_KEYWORD, ///< 等待输入特殊申明符
+    WAITING_FOR_DECL_ARG,     ///< 等待输入由特殊申明符指定的用大括号围起的参数
+    WAITING_FOR_PRECEDENCE_SYMBOL, ///< 等待输入具有优先级的符号
+    WAITING_FOR_ARROW,             ///< 等待输入rule的定义符("::=")
+    IN_RHS,
+    LHS_ALIAS_1,
+    LHS_ALIAS_2,
+    LHS_ALIAS_3,
+    RHS_ALIAS_1,
+    RHS_ALIAS_2,
+    PRECEDENCE_MARK_1,
+    PRECEDENCE_MARK_2,
+    RESYNC_AFTER_RULE_ERROR,
+    RESYNC_AFTER_DECL_ERROR,
+    WAITING_FOR_DESTRUCTOR_SYMBOL,
+    WAITING_FOR_DATATYPE_SYMBOL,
+    WAITING_FOR_FALLBACK_ID,
+    WAITING_FOR_WILDCARD_ID,
+    WAITING_FOR_CLASS_ID,
+    WAITING_FOR_CLASS_TOKEN,
+    WAITING_FOR_TOKEN_NAME
+};
+/// \brief Parser状态结构体
+struct pstate{
+
+};
+
+/**
+ * @brief
+ * @param psp
+ */
+static void parseonetoken(struct pstate *psp){
+
+}
+/**
+ * @brief
+ * @param z
+ */
+static void preprocess_input(char *z){
+
+}
+/**
+ * @brief
+ * @param lemp
+ */
+void Parse(struct lemon*lemp){
+
 }
 
 /**
