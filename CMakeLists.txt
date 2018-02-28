@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 project(lemon_learning)
-
 set(CMAKE_CXX_STANDARD 11)
-
+set(EXECUTABLE_OUTPUT_PATH bin)
 add_executable(lemon src/lemon.c)

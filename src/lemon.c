@@ -441,6 +441,11 @@ int main(int argc,char** argv){
     lem.basisflag = basisflag; // 储存选项初始化时获得的basisflag,basisflag初始值是0,如果用户输入"-b"选项,处理后basisflag的值为1
     lem.nolinenosflag=nolinenosflag; // 如果用户输入"-l"选项,则储存的值为1,否则为0
 
+    Symbol_new("$"); // 安装新符号"$"
+    lem.errsym=Symbol_new("error"); // 安装错误符号
+    lem.errsym->useCnt=0;
+
+    /* 分析处理语法文件 */
 
 }
 
@@ -975,7 +980,7 @@ void Symbol_init(void){
  *
  * 数组元素    ht[0] (A)    tbl[0] (B)       tbl[1] (C)
  *           |       |   | next(X): C |   | next(Y): 0,即NULL |
- * 结构体成员 |  B    |   | from:   A  |   | from:   X         |
+ * 结构体成员 |   B   |   | from:   A  |   | from:   X         |
  *
  * 注意: 1) X是tbl[0]->next的地址; Y是tbl[1]->next的地址.
  * 2) tbl[0]的key与tbl[1]的key计算出的hash值冲突(hash值都是0),所以才通过next连在一起,并且把链表首节点的地址放在ht[0].
