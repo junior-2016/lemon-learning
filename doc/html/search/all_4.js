@@ -7,7 +7,8 @@ var searchData=
   ['erraction',['errAction',['../structlemon.html#a7d995f7e9d7e6a9bb5fbf359344e8e86',1,'lemon']]],
   ['errline',['errline',['../lemon_8c.html#a5671813176fb4ad02e5f9c4245aa8cec',1,'lemon.c']]],
   ['error',['error',['../structlemon.html#a294f54d8e2db01b97128787f4fcaf663',1,'lemon::error()'],['../lemon_8c.html#a9695563ba2c3d4e59f4680439da60d8ba2fd6f336d08340583bd620a7f5694c90',1,'ERROR():&#160;lemon.c']]],
-  ['errorcnt',['errorcnt',['../structlemon.html#a3cf1bbc0784190e828d6e9aa97e0c387',1,'lemon']]],
+  ['errorcnt',['errorcnt',['../structlemon.html#a3cf1bbc0784190e828d6e9aa97e0c387',1,'lemon::errorcnt()'],['../structpstate.html#a1c161d486f203af3e5dc6a3259b56079',1,'pstate::errorcnt()']]],
+  ['errormsg',['ErrorMsg',['../lemon_8c.html#a5a689aac8e8ac0144cdf3b1401c530d9',1,'lemon.c']]],
   ['errstream',['errstream',['../lemon_8c.html#ac2d282732b666d8cef9a30bbe72655be',1,'lemon.c']]],
   ['errsym',['errsym',['../structlemon.html#abc9604a50182ad25f9adac62c9af6b1c',1,'lemon']]],
   ['extracode',['extracode',['../structlemon.html#ac4795352f79823338f9eb6861e996b24',1,'lemon']]]

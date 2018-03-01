@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vardest',['vardest',['../structlemon.html#a218d36617729ba9fda8ff23c6134808c',1,'lemon']]],
-  ['vartype',['vartype',['../structlemon.html#aba6673e46aed4d62614c1042f70fde66',1,'lemon']]]
+  ['usecnt',['useCnt',['../structsymbol.html#a34460b2b67b83927cc3a51b73c79cdd3',1,'symbol']]],
+  ['user_5ftemplatename',['user_templatename',['../lemon_8c.html#a732b7aed895270ad4c9189c2be0b6d61',1,'lemon.c']]]
 ];

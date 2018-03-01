@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
-#include <ctype.h> // 包含各种类型判断函数,比如isdigit()
+#include <stdarg.h> // 定义了可变参数va
+#include <ctype.h>  // 包含各种类型判断函数,比如isdigit()
 #include <assert.h>
 
 #define ISSPACE(x) isspace((unsigned char)(x)) ///< 判断是否为空白符
@@ -35,6 +35,11 @@ extern int access(const char* path,int mode);
 #include <unistd.h> // Unix操作系统标准API头文件
 #endif
 
+#define MAXRHS 1000 ///< 定义rule右边文法符号的最大数量
+
+static int showPrecedenceConflict = 0; ///< ???
+static char* msort(char*,char**,int(*)(const char*,const char*));///< ???
+
 #define lemonStrlen(x) ((int)(strlen(x))) ///<计算char*字符串长度
 
 /**
@@ -60,12 +65,18 @@ struct rule;
 struct lemon;
 struct action;
 
-
-static int showPrecedenceConflict = 0; ///< ???
-static char* msort(char*,char**,int(*)(const char*,const char*));///< ???
+/* Build */
 
 
-/* Option 相关声明 */
+/* ConfigList */
+
+
+
+/* Error */
+void ErrorMsg(const char *,int,const char *,...);
+
+
+/* Option */
 /// \brief 选项类型(枚举从1开始)
 enum option_type {
     OPT_FLAG=1,///<前缀为"-"或"+"的选项类型,同时选项的附加参数值(*arg)储存0(前缀为'+')或1(前缀为'-')
@@ -307,8 +318,28 @@ struct state**State_arrayof(void);
 
 
 
-/* Main()主程序部分 */
+/**
+ * @brief 将错误信息输出到文件(实际文件或屏幕控制台)
+ * @param filename 处理的语法文件名
+ * @param lineno  语法文件错处的行号,如果lineno==0,说明在处理语法文件之前已经发生错误.
+ * @param format 带格式控制的错误字符串输出,比如"Can't open %s."
+ * @param ...  可变参数va
+ */
+void ErrorMsg(const char *filename,int lineno,const char *format, ... ){
+    va_list  ap; // 储存可变参数的容器
+    fprintf(stderr,"%s:%d",filename,lineno); // 先在标准错误输出流输出发生错误的文件名和错处的行号
+    va_start(ap,format); // va_start(va_list,parmN)将paraN后面的一系列可变参数储存到va_list.所以这里第一个参数使用ap,第二个参数用format.
+    vfprintf(stderr,format,ap);
+    // vfprintf(FILE*file,const char*format,va_list ap):
+    // 将一次性把va_list变量ap储存的所有参数与带格式控制的字符串format一一对应后输出到文件流(实际文件流或标准输出流)file
+    // ps: 在一些程序需要针对va_list的每一个参数做不同的处理,就需要提前规定va_list参数的类型和顺序,
+    // 然后使用va_arg(va_list,type)一个个提取处理.比如 int v1=va_arg(ap,int);double v2=va_arg(ap,double);...
+    va_end(ap); // 调用va_end(va_list)后将销毁va_list储存的所有参数值,必须在最后一步才使用.
+    fprintf(stderr,"\n"); // 换行
+}
 
+
+/* main主程序部分 */
 /**
  * @brief 内存空间申请失败的错误提示处理
  */
@@ -448,8 +479,8 @@ int main(int argc,char** argv){
     lem.errsym=Symbol_new("error"); // 安装错误符号
     lem.errsym->useCnt=0;
 
-    /* 分析处理语法文件 */
-
+    /* 读取处理语法文件 */
+    Parse(&lem); // 将前面处理的lem变量(已经储存文件名)作为参数交给Parse
 }
 
 //-----------------------所有函数的实现----------------
@@ -787,32 +818,53 @@ void OptPrint(void){
 /// \brief Parser状态枚举
 enum e_state{
     INITIALIZE, ///< 初始状态
-    WAITING_FOR_DECL_OR_RULE, ///< 等待输入特殊申明符或rule
+    WAITING_FOR_DECL_OR_RULE, ///< 等待输入特殊申明符(形如:%...)或rule
     WAITING_FOR_DECL_KEYWORD, ///< 等待输入特殊申明符
     WAITING_FOR_DECL_ARG,     ///< 等待输入由特殊申明符指定的用大括号围起的参数
     WAITING_FOR_PRECEDENCE_SYMBOL, ///< 等待输入具有优先级的符号
     WAITING_FOR_ARROW,             ///< 等待输入rule的定义符("::=")
-    IN_RHS,
-    LHS_ALIAS_1,
-    LHS_ALIAS_2,
-    LHS_ALIAS_3,
-    RHS_ALIAS_1,
-    RHS_ALIAS_2,
-    PRECEDENCE_MARK_1,
-    PRECEDENCE_MARK_2,
-    RESYNC_AFTER_RULE_ERROR,
-    RESYNC_AFTER_DECL_ERROR,
-    WAITING_FOR_DESTRUCTOR_SYMBOL,
-    WAITING_FOR_DATATYPE_SYMBOL,
-    WAITING_FOR_FALLBACK_ID,
-    WAITING_FOR_WILDCARD_ID,
-    WAITING_FOR_CLASS_ID,
-    WAITING_FOR_CLASS_TOKEN,
-    WAITING_FOR_TOKEN_NAME
+    IN_RHS,        ///< 处于rule右方
+    LHS_ALIAS_1,   ///< 正在rule左边文法符号后的"("的后面,等待输入文法符号的别名
+    LHS_ALIAS_2,   ///< 已经读入文法符号的别名,等待输入")"
+    LHS_ALIAS_3,   ///< 已经输入")",等待输入rule的定义符"::="
+    RHS_ALIAS_1,   ///< 正在rule右边文法符号后的"("的后面,等待输入文法符号的别名
+    RHS_ALIAS_2,   ///< 已经读入文法符号的别名,等待输入")"
+    PRECEDENCE_MARK_1,   ///< 当前读到"[",
+    PRECEDENCE_MARK_2,   ///< 当前读到"]",注意[...]内部的字符串用来指定符号的优先级
+    RESYNC_AFTER_RULE_ERROR, ///< 当前rule出错
+    RESYNC_AFTER_DECL_ERROR, ///< 特殊申明符后面的参数出错
+    WAITING_FOR_DESTRUCTOR_SYMBOL, ///< 等待输入析构器符号
+    WAITING_FOR_DATATYPE_SYMBOL,   ///< 等待输入数据类型符号
+    WAITING_FOR_FALLBACK_ID,       ///< 等待输入fallback标志
+    WAITING_FOR_WILDCARD_ID,       ///<
+    WAITING_FOR_CLASS_ID,          ///<
+    WAITING_FOR_CLASS_TOKEN,       ///<
+    WAITING_FOR_TOKEN_NAME         ///<
 };
 /// \brief Parser状态结构体
 struct pstate{
-
+    char* filename; ///< 语法文件名称
+    int tokenlineno;///< 正在分析的符号的行号
+    int errorcnt;   ///< 目前错误个数
+    char* tokenstart; ///< 当前符号的名称(字符串形式)
+    struct lemon *gp; ///< 全局状态向量表
+    enum e_state state; ///< 当前词法分析器的状态
+    struct symbol *fallback; ///< fallback符号
+    struct symbol *tkclass;  ///< Token class symbol
+    struct symbol *lhs;      ///< 当前rule定义符左边的符号
+    const char *lhsalias;    ///< rule左边符号的别名
+    int nrhs;                ///< 到目前为止能看到的rule右边的符号数量
+    struct symbol *rhs[MAXRHS]; ///< rule右边符号数组,最多允许MAXRHS个
+    const char *alias[MAXRHS];  ///< 右边各个符号的别名(如果没有设为NULL)
+    struct rule *prevrule;      ///< 存放已经处理过的rule
+    const char *declkeyword;    ///< 存放特殊申明符("%...")
+    char **declargslot;         ///< 特殊申明符的参数
+    int insertLineMacro;        ///< Add #line before declaration insert
+    int *decllinenoslot;        ///< Where to write declaration line number
+    enum e_assoc declassoc;     ///< 指定符号的结合性
+    int preccounter;            ///< 指定符号的优先级
+    struct rule *firstrule;     ///< 语法文件的第一条rule
+    struct rule *lastrule;      ///< 指向到目前为止刚刚分析过的rule
 };
 
 /**
@@ -830,11 +882,33 @@ static void preprocess_input(char *z){
 
 }
 /**
- * @brief
- * @param lemp
+ * @brief 词法分析函数,用来读取并处理整一个语法文件
+ * @param lemp lemon结构指针,在main函数处理一部分后(比如储存语法文件名)
+ * 作为参数传递给Parse()作进一步处理
  */
-void Parse(struct lemon*lemp){
+void Parse(struct lemon* gp){
+    struct pstate ps; // 词法分析状态结构体变量
+    FILE *fp; // 打开语法文件的文件指针
+    char *filebuf; // 文件缓冲区(储存地址)
+    unsigned int filesize; // 文件大小
+    int lineno;
+    int c;
+    char *cp, *nextcp;
+    int startline=0;
 
+    memset(&ps,'\0', sizeof(ps)); // 清空ps
+
+    // 初始化ps的部分成员
+    ps.gp=gp;
+    ps.filename=gp->filename;
+    ps.errorcnt=0;
+    ps.state=INITIALIZE;
+
+    // 开始读取文件
+    fp=fopen(ps.filename,"rb"); // 二进制读取
+    if (fp==0){
+
+    }
 }
 
 /**

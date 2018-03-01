@@ -1,0 +1,9 @@
+<map id="pstate" name="pstate">
+<area shape="rect" id="node2" href="$structsymbol.html" title="symbol(符号)结构体 " alt="" coords="155,7,219,33"/>
+<area shape="rect" id="node3" href="$structrule.html" title="rule(文法规则)结构体 " alt="" coords="221,128,264,155"/>
+<area shape="rect" id="node4" href="$structlemon.html" title="lemon结构体: 整个语法分析器最核心的结构! " alt="" coords="179,492,237,519"/>
+<area shape="rect" id="node8" href="$structaction.html" title="action结构体 " alt="" coords="375,227,433,254"/>
+<area shape="rect" id="node5" href="$structstate.html" title="state结构体 " alt="" coords="325,378,376,405"/>
+<area shape="rect" id="node6" href="$structconfig.html" title="config结构体,config是对rule进行处理后的结果 " alt="" coords="375,492,433,519"/>
+<area shape="rect" id="node7" href="$structplink.html" title="plink结构体 " alt="" coords="378,597,427,624"/>
+</map>

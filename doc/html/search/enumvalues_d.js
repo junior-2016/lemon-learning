@@ -7,6 +7,5 @@ var searchData=
   ['waiting_5ffor_5fdecl_5for_5frule',['WAITING_FOR_DECL_OR_RULE',['../lemon_8c.html#a74a75e4700f1f71bb89d80765319e57ba3015abe8359eb2d83aeb285a8998a015',1,'lemon.c']]],
   ['waiting_5ffor_5fdestructor_5fsymbol',['WAITING_FOR_DESTRUCTOR_SYMBOL',['../lemon_8c.html#a74a75e4700f1f71bb89d80765319e57ba7896a155ec65933973ca91f34e6c6950',1,'lemon.c']]],
   ['waiting_5ffor_5ffallback_5fid',['WAITING_FOR_FALLBACK_ID',['../lemon_8c.html#a74a75e4700f1f71bb89d80765319e57bad4b6071418d830c4c383ced4e10b62bf',1,'lemon.c']]],
-  ['waiting_5ffor_5fprecedence_5fsymbol',['WAITING_FOR_PRECEDENCE_SYMBOL',['../lemon_8c.html#a74a75e4700f1f71bb89d80765319e57ba7c815bb4711633df7dc6a167716d7942',1,'lemon.c']]],
-  ['wildcard',['wildcard',['../structlemon.html#a5930609f3cc485e971fc008239835c09',1,'lemon']]]
+  ['waiting_5ffor_5fprecedence_5fsymbol',['WAITING_FOR_PRECEDENCE_SYMBOL',['../lemon_8c.html#a74a75e4700f1f71bb89d80765319e57ba7c815bb4711633df7dc6a167716d7942',1,'lemon.c']]]
 ];

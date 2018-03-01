@@ -81,6 +81,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structpstate-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">pstate Struct Reference</div>  </div>
 </div><!--header-->
@@ -88,10 +91,116 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Parser状态结构体  
  <a href="structpstate.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for pstate:</div>
+<div class="dyncontent">
+<div class="center"><img src="structpstate__coll__graph.png" border="0" usemap="#pstate_coll__map" alt="Collaboration graph"/></div>
+<map name="pstate_coll__map" id="pstate_coll__map">
+<area shape="rect" id="node2" href="structsymbol.html" title="symbol(符号)结构体 " alt="" coords="155,7,219,33"/>
+<area shape="rect" id="node3" href="structrule.html" title="rule(文法规则)结构体 " alt="" coords="221,128,264,155"/>
+<area shape="rect" id="node4" href="structlemon.html" title="lemon结构体: 整个语法分析器最核心的结构! " alt="" coords="179,492,237,519"/>
+<area shape="rect" id="node8" href="structaction.html" title="action结构体 " alt="" coords="375,227,433,254"/>
+<area shape="rect" id="node5" href="structstate.html" title="state结构体 " alt="" coords="325,378,376,405"/>
+<area shape="rect" id="node6" href="structconfig.html" title="config结构体,config是对rule进行处理后的结果 " alt="" coords="375,492,433,519"/>
+<area shape="rect" id="node7" href="structplink.html" title="plink结构体 " alt="" coords="378,597,427,624"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a3046972c535a60e0b5ef0be08bddc3b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3046972c535a60e0b5ef0be08bddc3b0"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a3046972c535a60e0b5ef0be08bddc3b0">filename</a></td></tr>
+<tr class="memdesc:a3046972c535a60e0b5ef0be08bddc3b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">语法文件名称 <br /></td></tr>
+<tr class="separator:a3046972c535a60e0b5ef0be08bddc3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfe7adc67da5621e844fca34dd0889ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfe7adc67da5621e844fca34dd0889ec"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#acfe7adc67da5621e844fca34dd0889ec">tokenlineno</a></td></tr>
+<tr class="memdesc:acfe7adc67da5621e844fca34dd0889ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">正在分析的符号的行号 <br /></td></tr>
+<tr class="separator:acfe7adc67da5621e844fca34dd0889ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c161d486f203af3e5dc6a3259b56079"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c161d486f203af3e5dc6a3259b56079"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a1c161d486f203af3e5dc6a3259b56079">errorcnt</a></td></tr>
+<tr class="memdesc:a1c161d486f203af3e5dc6a3259b56079"><td class="mdescLeft">&#160;</td><td class="mdescRight">目前错误个数 <br /></td></tr>
+<tr class="separator:a1c161d486f203af3e5dc6a3259b56079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab43cf3be5456af13f4b51437e7341751"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab43cf3be5456af13f4b51437e7341751"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#ab43cf3be5456af13f4b51437e7341751">tokenstart</a></td></tr>
+<tr class="memdesc:ab43cf3be5456af13f4b51437e7341751"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前符号的名称(字符串形式) <br /></td></tr>
+<tr class="separator:ab43cf3be5456af13f4b51437e7341751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fdae87f13f8df612a9ba09f6ec3b789"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0fdae87f13f8df612a9ba09f6ec3b789"></a>
+struct <a class="el" href="structlemon.html">lemon</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a0fdae87f13f8df612a9ba09f6ec3b789">gp</a></td></tr>
+<tr class="memdesc:a0fdae87f13f8df612a9ba09f6ec3b789"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局状态向量表 <br /></td></tr>
+<tr class="separator:a0fdae87f13f8df612a9ba09f6ec3b789"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1083be3af3a58e86e01f1ac1ef9d14aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1083be3af3a58e86e01f1ac1ef9d14aa"></a>
+enum <a class="el" href="lemon_8c.html#a74a75e4700f1f71bb89d80765319e57b">e_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a1083be3af3a58e86e01f1ac1ef9d14aa">state</a></td></tr>
+<tr class="memdesc:a1083be3af3a58e86e01f1ac1ef9d14aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前词法分析器的状态 <br /></td></tr>
+<tr class="separator:a1083be3af3a58e86e01f1ac1ef9d14aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c42e4ccf94270f715b099fc85fe4b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7c42e4ccf94270f715b099fc85fe4b8"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#aa7c42e4ccf94270f715b099fc85fe4b8">fallback</a></td></tr>
+<tr class="memdesc:aa7c42e4ccf94270f715b099fc85fe4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">fallback符号 <br /></td></tr>
+<tr class="separator:aa7c42e4ccf94270f715b099fc85fe4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a145756fd712ddd9571b9b7d8e7ae9b26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a145756fd712ddd9571b9b7d8e7ae9b26"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a145756fd712ddd9571b9b7d8e7ae9b26">tkclass</a></td></tr>
+<tr class="memdesc:a145756fd712ddd9571b9b7d8e7ae9b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Token class symbol. <br /></td></tr>
+<tr class="separator:a145756fd712ddd9571b9b7d8e7ae9b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbcb3ad04c6fb0ffd7e4beaf5606ff2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacbcb3ad04c6fb0ffd7e4beaf5606ff2"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#aacbcb3ad04c6fb0ffd7e4beaf5606ff2">lhs</a></td></tr>
+<tr class="memdesc:aacbcb3ad04c6fb0ffd7e4beaf5606ff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前rule定义符左边的符号 <br /></td></tr>
+<tr class="separator:aacbcb3ad04c6fb0ffd7e4beaf5606ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace715d18462afba755c8a9d08303e7b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace715d18462afba755c8a9d08303e7b5"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#ace715d18462afba755c8a9d08303e7b5">lhsalias</a></td></tr>
+<tr class="memdesc:ace715d18462afba755c8a9d08303e7b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">rule左边符号的别名 <br /></td></tr>
+<tr class="separator:ace715d18462afba755c8a9d08303e7b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a8c0e9f271b6e2f235a6da796c4823d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a8c0e9f271b6e2f235a6da796c4823d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a5a8c0e9f271b6e2f235a6da796c4823d">nrhs</a></td></tr>
+<tr class="memdesc:a5a8c0e9f271b6e2f235a6da796c4823d"><td class="mdescLeft">&#160;</td><td class="mdescRight">到目前为止能看到的rule右边的符号数量 <br /></td></tr>
+<tr class="separator:a5a8c0e9f271b6e2f235a6da796c4823d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae71c3d93c92a602fb759b4f868d5229c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae71c3d93c92a602fb759b4f868d5229c"></a>
+struct <a class="el" href="structsymbol.html">symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#ae71c3d93c92a602fb759b4f868d5229c">rhs</a> [<a class="el" href="lemon_8c.html#a2f6841589db4dcc8ca996adef30bd039">MAXRHS</a>]</td></tr>
+<tr class="memdesc:ae71c3d93c92a602fb759b4f868d5229c"><td class="mdescLeft">&#160;</td><td class="mdescRight">rule右边符号数组,最多允许MAXRHS个 <br /></td></tr>
+<tr class="separator:ae71c3d93c92a602fb759b4f868d5229c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfcb64757e9dd9742ab21b81c541e53c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abfcb64757e9dd9742ab21b81c541e53c"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#abfcb64757e9dd9742ab21b81c541e53c">alias</a> [<a class="el" href="lemon_8c.html#a2f6841589db4dcc8ca996adef30bd039">MAXRHS</a>]</td></tr>
+<tr class="memdesc:abfcb64757e9dd9742ab21b81c541e53c"><td class="mdescLeft">&#160;</td><td class="mdescRight">右边各个符号的别名(如果没有设为NULL) <br /></td></tr>
+<tr class="separator:abfcb64757e9dd9742ab21b81c541e53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd58cd38bed0e78371da67e84ae6b77d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd58cd38bed0e78371da67e84ae6b77d"></a>
+struct <a class="el" href="structrule.html">rule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#acd58cd38bed0e78371da67e84ae6b77d">prevrule</a></td></tr>
+<tr class="memdesc:acd58cd38bed0e78371da67e84ae6b77d"><td class="mdescLeft">&#160;</td><td class="mdescRight">存放已经处理过的rule <br /></td></tr>
+<tr class="separator:acd58cd38bed0e78371da67e84ae6b77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eadfc640270f030a5db5ac0cac350cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4eadfc640270f030a5db5ac0cac350cc"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a4eadfc640270f030a5db5ac0cac350cc">declkeyword</a></td></tr>
+<tr class="memdesc:a4eadfc640270f030a5db5ac0cac350cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">存放特殊申明符("%...") <br /></td></tr>
+<tr class="separator:a4eadfc640270f030a5db5ac0cac350cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4efccfc09ac41604466cc899d8ba9bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4efccfc09ac41604466cc899d8ba9bc"></a>
+char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#ac4efccfc09ac41604466cc899d8ba9bc">declargslot</a></td></tr>
+<tr class="memdesc:ac4efccfc09ac41604466cc899d8ba9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">特殊申明符的参数 <br /></td></tr>
+<tr class="separator:ac4efccfc09ac41604466cc899d8ba9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53baecab7c6eb53da70d872c3a020d5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53baecab7c6eb53da70d872c3a020d5a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a53baecab7c6eb53da70d872c3a020d5a">insertLineMacro</a></td></tr>
+<tr class="memdesc:a53baecab7c6eb53da70d872c3a020d5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add #line before declaration insert. <br /></td></tr>
+<tr class="separator:a53baecab7c6eb53da70d872c3a020d5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd23424f898cb8b75311aed1ad1020f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbd23424f898cb8b75311aed1ad1020f"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#acbd23424f898cb8b75311aed1ad1020f">decllinenoslot</a></td></tr>
+<tr class="memdesc:acbd23424f898cb8b75311aed1ad1020f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where to write declaration line number. <br /></td></tr>
+<tr class="separator:acbd23424f898cb8b75311aed1ad1020f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30860ff79023cbc6b234a48bb534f289"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30860ff79023cbc6b234a48bb534f289"></a>
+enum <a class="el" href="lemon_8c.html#a8a4ff1bee8c11dde5ab054f22ff3abd8">e_assoc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a30860ff79023cbc6b234a48bb534f289">declassoc</a></td></tr>
+<tr class="memdesc:a30860ff79023cbc6b234a48bb534f289"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定符号的结合性 <br /></td></tr>
+<tr class="separator:a30860ff79023cbc6b234a48bb534f289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a807f9636be0286b1ffbdc32b5d19c7c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a807f9636be0286b1ffbdc32b5d19c7c8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#a807f9636be0286b1ffbdc32b5d19c7c8">preccounter</a></td></tr>
+<tr class="memdesc:a807f9636be0286b1ffbdc32b5d19c7c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定符号的优先级 <br /></td></tr>
+<tr class="separator:a807f9636be0286b1ffbdc32b5d19c7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9807a90d93a3e1777609df2d01fa9dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9807a90d93a3e1777609df2d01fa9dc"></a>
+struct <a class="el" href="structrule.html">rule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#aa9807a90d93a3e1777609df2d01fa9dc">firstrule</a></td></tr>
+<tr class="memdesc:aa9807a90d93a3e1777609df2d01fa9dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">语法文件的第一条rule <br /></td></tr>
+<tr class="separator:aa9807a90d93a3e1777609df2d01fa9dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae965736c8e1e422123ca5694cf8146f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae965736c8e1e422123ca5694cf8146f2"></a>
+struct <a class="el" href="structrule.html">rule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpstate.html#ae965736c8e1e422123ca5694cf8146f2">lastrule</a></td></tr>
+<tr class="memdesc:ae965736c8e1e422123ca5694cf8146f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">指向到目前为止刚刚分析过的rule <br /></td></tr>
+<tr class="separator:ae965736c8e1e422123ca5694cf8146f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Parser状态结构体 </p>
 
-<p>Definition at line <a class="el" href="lemon_8c_source.html#l00817">817</a> of file <a class="el" href="lemon_8c_source.html">lemon.c</a>.</p>
+<p>Definition at line <a class="el" href="lemon_8c_source.html#l00848">848</a> of file <a class="el" href="lemon_8c_source.html">lemon.c</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="lemon_8c_source.html">lemon.c</a></li>
 </ul>
