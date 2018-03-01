@@ -845,7 +845,7 @@ enum e_state{
 struct pstate{
     char* filename; ///< 语法文件名称
     int tokenlineno;///< 正在分析的符号的行号
-    int errorcnt;   ///< 目前错误个数
+    int errorcnt;   ///< 词法分析过程中错误的个数
     char* tokenstart; ///< 当前符号的名称(字符串形式)
     struct lemon *gp; ///< 全局状态向量表
     enum e_state state; ///< 当前词法分析器的状态
@@ -876,7 +876,7 @@ static void parseonetoken(struct pstate *psp){
 }
 /**
  * @brief
- * @param z
+ * @param z 读入的语法文件缓存
  */
 static void preprocess_input(char *z){
 
@@ -905,10 +905,41 @@ void Parse(struct lemon* gp){
     ps.state=INITIALIZE;
 
     // 开始读取文件
-    fp=fopen(ps.filename,"rb"); // 二进制读取
-    if (fp==0){
-
+    fp=fopen(ps.filename,"rb"); // 二进制方式读取
+    if (fp==0){ // 无法读取
+        ErrorMsg(ps.filename,0,"Can't open this file for reading.");
+        gp->errorcnt++;
+        return;
     }
+    fseek(fp,0,SEEK_END);
+    // fseek(FILE*,offset,mode),用来设置文件内部读取数据的位置指针的位置.
+    // 其中offset可正可负,mode只有三种SEEK_SET(文件开头)/SEEK_CUR(当前文件读取位置)/SEEK_END(文件结束位置).
+    // fseek()代表把位置指针指向距离mode处offset偏移的位置.因此fseek(fp,0,SEEK_END)
+    // 代表把位置指针指向距离文件结束且偏移0的位置,其实就是文件结束位置.
+    // 确定了这个位置后调用ftell(FILE*)可以精确得到文件大小(对于二进制文件就是文件的字节数目)
+    filesize=ftell(fp);// 得到二进制文件的字节数大小(因为语法文件仅有ASCII字符,所以字节数等同于文件大小,如果是其他编码文件就不一定了)
+    rewind(fp);// 恢复文件内部的位置指针的位置
+    filebuf=(char*)malloc(filesize+1); // 申请文件缓存(+1是提供一个'\0')
+    if (filesize>100000000||filebuf==0){
+        ErrorMsg(ps.filename,0,"Input file too large.");
+        gp->errorcnt++;
+        fclose(fp); // 记住关闭文件流
+        return;
+    }
+    if (fread(filebuf,1,filesize,fp)!=filesize){//读取到缓存失败
+        ErrorMsg(ps.filename,0,"Can't read in all %d bytes of this file.",
+          filesize);
+        free(filebuf); // 释放缓存
+        gp->errorcnt++;
+        fclose(fp);
+        return;
+    }
+    fclose(fp); // 关闭文件输入流
+    filebuf[filesize]=0; // 置缓存中最后的字符为'\0'
+
+    preprocess_input(filebuf); // 预处理语法文件中%ifdef和%ifndef定义的宏
+
+
 }
 
 /**
